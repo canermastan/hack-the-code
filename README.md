@@ -40,6 +40,7 @@ An academic paper regarding this project was published in 2024. You can read the
 
 - **Backend**: Java 17
 - **Database**: PostgreSQL
+- **Frontend**: Thymeleaf for rendering dynamic content
 - **Monitoring**: Docker with Prometheus and Grafana for performance monitoring
 - **Docker Compose**: `docker-compose-monitoring.yml` for container orchestration
 
