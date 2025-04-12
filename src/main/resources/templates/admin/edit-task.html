@@ -1,0 +1,108 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta
+            name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+    <title>Task List</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Add Task</title>
+
+
+</head>
+<body>
+<div class="ui grid">
+    <div class="one wide column"></div>
+    <div class="ui fourteen wide column" style="margin-top: 5px">
+        <div class="row">
+            <h2 class="ui header">
+                <img class="ui image" src="https://fomantic-ui.com/images/icons/school.png">
+                <div class="content">
+                    Soru
+                </div>
+            </h2>
+        </div>
+        <br>
+        <div class="row">
+            <form th:action="@{/admin/task/update}" th:object="${task}" method="POST">
+                <div class="ui form">
+                    <div class="field">
+                        <label>Title</label>
+                        <input type="text" th:field="*{title}" />
+                    </div>
+
+                    <div class="field">
+                        <label>Content</label>
+                    <textarea id="editor" th:field="*{content}"></textarea>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Difficulty</label>
+                    <input type="text" th:field="*{difficulty}" />
+                </div>
+
+                <div class="field">
+                    <label>Success Rate</label>
+                    <input type="number" step="0.01" th:field="*{successRate}" />
+                </div>
+
+                <div class="field">
+                    <label>Score</label>
+                    <input type="number" th:field="*{score}" />
+                </div>
+
+                <div class="field">
+                    <label>Rating</label>
+                    <input type="number" step="0.01" th:field="*{rating}" />
+                </div>
+
+                <div class="field">
+                    <label>Task Id</label>
+                    <input type="number" th:field="*{id}" readonly/>
+                </div>
+
+                <div class="field">
+                    <label>Language</label>
+                    <input type="number" name="languageId" th:value="${task.get().getLanguage().getId()}"/>
+                </div>
+
+                <button type="submit" class="ui large button green" style="flex: 0; float: right; margin-top: 5px;">
+                    Kaydet
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.tiny.cloud/1/lz0abin94vbk066vc7dtvk9ww93ufhckx2dtrboojgwmh7f8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+
+</script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
+        integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="icon" type="image/ico" href="../../static/images/logo/favicon.ico"
+          th:href="@{/images/logo/favicon.ico}"/>
+
+    <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+
+    <title>Anasayfa</title>
+    <style>
+        .text-center {
+            text-align: center !important;
+        }
+
+        th {
+            text-align: center !important;
+        }
+    </style>
+
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+            name="description"
+            content="Algoritma sorularını çözerek kodlama yeteneğini geliştir! Kodla Çöz, algoritmaları öğrenmenin ve pratik yapmanın en iyi yoludur. Kodla Çöz, tamamen Türkçe ve ücretsiz!"
+    />
+    <meta property="og:title" content="Kodla Çöz | Algoritma Sorusu Çözme Platformu" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="Kodlacoz.com" />
+    <meta name="keywords" content="Algoritma, Algorithm, Kodlama, Code, Coding, Türkçe"/>
+</head>
+<body>
+<div th:insert="fragments/navbar.html :: navbar"></div>
+<div class="ui grid">
+    <div class="one wide column"></div>
+    <div class="ui fourteen wide column" style="margin-top: 5px">
+
+        <br>
+        <div class="row" id="notification">
+            <div class="ui warning message centered tiny">
+                <i class="close icon"></i>
+                <div class="header">
+                    Duyuru
+                    <i class="right bullhorn icon"></i>
+                </div>
+                Bu bir test sürümüdür. Bu sürümde yalnızca "Genel Algoritma Görevleri" bölümündeki soruların "C" dilindeki çözümleri çalışmaktadır. Sorunlarınızı ve görüşlerinizi sağ alttaki "Geri Bildirim" butonundan bize iletebilirsiniz. İlginiz için teşekkür ederiz.
+            </div>
+            <br>
+        </div>
+        <div class="row">
+            <div class="ui two column grid">
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a th:href="@{/algorithm}" class="ui red ribbon label">Tıkla</a>
+                        <span>Algoritma öğrenmeye başla!</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a th:href="@{/algorithm}" class="ui orange right ribbon label">Tıkla</a>
+                        <span>Kodlama yeteneklerini geliştir!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="ui horizontal divider header" style="margin-top: 30px">
+            <i class="trophy icon"></i>
+            Derece
+        </h4>
+
+        <div class="ui teal progress" data-total="100" id="level" style="margin-bottom: 50px">
+            <div class="bar">
+                <div class="progress"></div>
+            </div>
+            <div class="label" id="user-level"></div>
+        </div>
+
+        <h4 class="ui horizontal divider header" style="margin-bottom: 30px">
+            Sıralama
+        </h4>
+
+        <div class="ui grid center aligned stackable container">
+            <div class="row">
+                <div class="four wide column"></div>
+                <div class="eight wide column">
+                    <!-- leaderboard -->
+                    <table class="ui very basic collapsing celled table" style="margin-left: 120px">
+                        <thead>
+                        <tr>
+                            <th>Kullanıcı</th>
+                            <th>Seviye</th>
+                            <th>Puan</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user: ${leaderboardUsers}">
+                            <td>
+                                <h4 class="ui image header">
+                                    <img th:src="@{/images/default_user_KODLACOZ.png}"
+                                         class="ui mini rounded image" style="margin-left: 5px">
+                                    <div class="content">
+                                        <a th:href="@{|/profile/${user.getId()}|}"
+                                           th:text="${user.getNickname()}">Lena</a>
+                                        <div class="sub header" th:text="${user.getFullName()}">Human Resources
+                                        </div>
+                                    </div>
+                                </h4>
+                            </td>
+                            <td class="text-center" th:text="${user.getLevel()}">
+                                10
+                            </td>
+
+                            <td class="text-center" th:text="${user.getTotalScore()}">
+                                1023
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="four wide column"></div>
+            </div>
+
+        </div>
+        <h4 class="ui horizontal divider header">
+            <i class="code icon"></i>
+            Programlama Dilleri
+        </h4>
+        <br>
+        <div class="ui four cards">
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">Python</div>
+                    <div class="description">
+                        Python dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/2}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">Java</div>
+                    <div class="description">
+                        Java dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/3}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">C#</div>
+                    <div class="description">
+                        C# dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/4}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">C</div>
+                    <div class="description">
+                        C dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/5}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">C++</div>
+                    <div class="description">
+                        C++ dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/6}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">JavaScript</div>
+                    <div class="description">
+                        JavaScript dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/7}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">Go</div>
+                    <div class="description">
+                        Go dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/8}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card text-center">
+                <div class="content">
+                    <div class="header">Php</div>
+                    <div class="description">
+                        Php dili ile çözülebilecek sorular
+                    </div>
+
+                </div>
+                <a th:href="@{/algorithm/9}">
+                    <div class="ui bottom primary attached button">
+                        Çalışmaya başla
+                        <i class="right arrow icon"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    //  data-value="76"
+    $('#level').progress({
+        label: 'ratio',
+        percent: /*[[${user.getLevelPercentage()}]]*/ 100,
+        text: {
+            ratio: /*[['Puan: '+${user.totalScore}]]*/ 'Puan: '
+        }
+    });
+
+    $('#user-level').text(/*[[${'Seviye: '+ user.level + '/40'}]]*/);
+    /*]]>*/
+
+    $('#notification .message .close')
+        .on('click', function () {
+            $(this)
+                .closest('#notification')
+                .transition('fade')
+            ;
+        })
+    ;
+
+</script>
+</body>
+</html>

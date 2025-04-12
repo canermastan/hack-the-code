@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="fomantic-js">
+        <script th:src="@{https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js}"></script>
+
+        <script>
+            const options = {
+                id: 'feedback', // id to identify the form on the backend
+                endpoint: '/feedback', // enpoint of your backend to handle the submission
+                emailField: true, // show email input field, default: false
+                events: false, // Emit feedback-submit event instead of sending data to endpoint
+                forceShowButton: false, // Show the default button even if you use `data-feedback-trigger`
+                types: { // Feedback types
+                    general: {
+                        text: 'Genel',
+                        icon: '💖'
+                    },
+                    idea: {
+                        text: 'Bir Önerim Var',
+                        icon: '💡'
+                    },
+                    bug: {
+                        text: 'Bir Sorun Buldum',
+                        icon: '🐞'
+                    }
+                },
+                btnTitle: 'Geri Bildirim', // title of button
+                title: 'Kodla Çöz', // text at the top
+                inputPlaceholder: 'Geri bildiriminiz buraya gelecek',
+                emailPlaceholder: 'Email adresi (İsteğe bağlı)',
+                submitText: 'Gönder', // text for submit button
+                backText: 'Geri', // text for back button
+                contactText: 'İsterseniz bize Email ile ulaşın!', // text for other contact option
+                contactLink: 'mailto:iletisim@kodlacoz.com', // link for other contact option
+                typeMessage: 'Ne tür bir geri bildiriminiz var?', // message for selecting feedback type
+                success: 'Teşekkürler! 👊', // message displayed on successfull submission
+                failedTitle: 'Oops, bir hata oluştu!', // title displayed on error
+                failedMessage: 'Lütfen tekrar deneyin. Eğer devam ederse bunun yerine bize email gönderebilirsiniz.', // default error message if backend doesn't return one
+                position: 'right', // position of button left/right
+                primary: 'rgb(53, 222, 118)', // primary color
+                background: '#fff', // background color
+                color: '#000' // font color
+            }
+
+            var scriptTag = document.createElement("script");
+            scriptTag.src = "https://cdn.jsdelivr.net/npm/@betahuhn/feedback-js/dist/feedback-js.min.js";
+            scriptTag.setAttribute("data-feedback-opts", JSON.stringify(options));
+
+            document.body.appendChild(scriptTag);
+        </script>
+
+    </div>
+</html>

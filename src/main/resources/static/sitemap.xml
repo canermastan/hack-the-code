@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Anasayfa (Dashboard) -->
+    <url>
+        <loc>https://www.kodlacoz.com</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Kayıt (Register) -->
+    <url>
+        <loc>https://www.kodlacoz.com/register</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Giriş (Login) -->
+    <url>
+        <loc>https://www.kodlacoz.com/login</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Şifremi Unuttum (Forgot Password) -->
+    <url>
+        <loc>https://www.kodlacoz.com/forgot_password</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Şifre Sıfırlama (Reset Password) -->
+    <url>
+        <loc>https://www.kodlacoz.com/reset_password</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Kullanıcı Kontrol Paneli (Dashboard) -->
+    <url>
+        <loc>https://www.kodlacoz.com/dashboard</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Kullanıcı Profili (Profile) -->
+    <url>
+        <loc>https://www.kodlacoz.com/profile</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Kullanıcı Ayarları (Settings) -->
+    <url>
+        <loc>https://www.kodlacoz.com/settings</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>

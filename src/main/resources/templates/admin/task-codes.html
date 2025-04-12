@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta
+          name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+  <title>Task List</title>
+
+</head>
+<body>
+<div class="ui grid">
+  <div class="one wide column"></div>
+  <div class="ui fourteen wide column" style="margin-top: 5px">
+    <div class="row">
+      <h2 class="ui header">
+        <img class="ui image" src="https://fomantic-ui.com/images/icons/school.png">
+        <div class="content">
+          Soru
+        </div>
+      </h2>
+
+      <div>
+        <a th:href="@{/admin/taskcode/new/{id}(id=${task.id})}" style="flex: 0; float: right; margin-bottom: 5px;"><button class="ui button green">Oluştur</button></a>
+      </div>
+
+      <table class="ui red table">
+        <thead>
+        <tr>
+          <th>Dil</th>
+          <th>Code</th>
+          <th>Test Code</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="taskCode : ${taskCodes}">
+          <td th:text="${taskCode.getLanguageId()}"></td>
+          <td th:text="${taskCode.getCode()}"></td>
+          <td th:text="${taskCode.getTestCode()}"></td>
+          <td>
+           <a th:href="@{/admin/task/codes/update/{taskId}/{languageId}(taskId=${taskCode.getTaskId()}, languageId=${taskCode.getLanguageId()})}"><button class="ui button primary">Düzenle</button></a>
+            <form th:action="@{/admin/task/codes/delete/{taskId}/{languageId}(taskId=${taskCode.getTaskId()}, languageId=${taskCode.getLanguageId()})}" method="POST" style="display: inline-block" onsubmit="return confirmDelete(event)">
+              <button type="submit" class="ui button red" disabled>Sil</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div class="row">
+    </div>
+  </div>
+</div>
+<script>
+  function confirmDelete(event) {
+    if (!confirm("İlk onay: Emin misiniz?")) {
+      event.preventDefault();
+      return false;
+    }
+
+    if (!confirm("İkinci onay: Gerçekten silmek istediğinize emin misiniz?")) {
+      event.preventDefault();
+      return false;
+    }
+
+    return true;
+  }
+</script>
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+</body>
+</html>

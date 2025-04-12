@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="icon" type="image/ico" href="../../static/images/logo/favicon.ico"
+          th:href="@{/images/logo/favicon.ico}"/>
+
+    <title th:text="${'Profil' + ' - ' +user.nickname}">Profilim</title>
+    <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+            name="description"
+            content="Algoritma sorularını çözerek kodlama yeteneğini geliştir! Kodla Çöz, algoritmaları öğrenmenin ve pratik yapmanın en iyi yoludur. Kodla Çöz, tamamen Türkçe ve ücretsiz!"
+    />
+    <meta property="og:title" content="Kodla Çöz | Algoritma Sorusu Çözme Platformu" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="Kodlacoz.com" />
+    <meta name="keywords" content="Algoritma, Algorithm, Kodlama, Code, Coding, Türkçe"/>
+</head>
+<body>
+<div th:insert="fragments/navbar.html :: navbar"></div>
+
+<div class="ui grid container">
+    <div class="four wide column" style="margin-top: 2px;">
+        <div th:insert="fragments/user-left-menu.html :: user-left-menu"></div>
+    </div>
+    <div class="twelve wide column" style="margin-top: 2px">
+        <div class="row">
+            <h2 class="ui center aligned icon header">
+                <i class="circular user icon"></i>
+                Profil
+                <div class="sub header"></div>
+            </h2>
+        </div>
+        <div class="row" style="margin-top: 4%">
+            <h4 class="ui horizontal divider header">
+                <i class="trophy icon"></i>
+                Derece
+            </h4>
+
+            <div class="ui teal progress" data-total="100" id="level" style="margin-bottom: 50px">
+                <div class="bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="label" id="user-level"></div>
+            </div>
+        </div>
+
+        <div class="ui grid container centered">
+            <div class="row" style="margin-top: 4%">
+                <div class="ui statistics">
+                    <div class="teal statistic">
+                        <div class="value" th:text="${countSolvedTask}">
+
+                        </div>
+                        <div class="label" style="margin-bottom: 4px">
+                            Çözülen Soru Sayısı
+                        </div>
+                        <br>
+                        <a th:href="@{/algorithm}"><div class="ui primary button"><i class="search icon"></i>Sorulara göz at</div></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+<script th:inline="javascript">
+    // active effect
+    $("#profile").addClass("active")
+    $('#level').progress({
+        label: 'ratio',
+        text: {
+            ratio: 'Puan: 358/550'
+        }
+    });
+
+    /*<![CDATA[*/
+
+    //  data-value="76"
+    $('#level').progress({
+        label: 'ratio',
+        percent: /*[[${user.getLevelPercentage()}]]*/ 100,
+        text: {
+            ratio: /*[['Puan: '+${user.totalScore}]]*/ 'Puan: '
+        }
+    });
+
+    $('#user-level').text(/*[[${'Seviye: '+ user.level + '/40'}]]*/);
+    /*]]>*/
+</script>
+</body>
+</html>

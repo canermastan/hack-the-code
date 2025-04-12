@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta
+            name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+
+    <title>Add Task</title>
+
+</head>
+
+<body>
+<div class="ui grid">
+    <div class="one wide column"></div>
+    <div class="ui fourteen wide column" style="margin-top: 5px">
+        <div class="row">
+            <h2 class="ui header">
+                <img class="ui image" src="https://fomantic-ui.com/images/icons/school.png">
+                <div class="content">
+                    Yeni Soru Ekle
+                </div>
+            </h2>
+        </div>
+        <br>
+        <div class="row">
+            <form th:action="@{/admin/task/new}" th:object="${task}" method="POST">
+                <div class="ui form">
+                    <h2>Başlık</h2>
+                    <input name="title" class="form-control" placeholder="Başlık" type="text" th:field="*{title}"/>
+                    <h2>Zorluk</h2>
+                    <p></p>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="difficulty1" name="difficulty" class="custom-control-input" value="Kolay">
+                        <label >Kolay</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="difficulty2" name="difficulty" class="custom-control-input" value="Orta">
+                        <label >Orta</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="difficulty3" name="difficulty" class="custom-control-input" value="Zor">
+                        <label>Zor</label>
+                    </div>
+                    <h2>Score</h2>
+                    <input class="form-control" type="number" th:field="*{score}"/>
+                    <h2>Language</h2>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option1" name="languageId" class="custom-control-input" value="1">
+                        <label class="custom-control-label">Genel</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option2" name="languageId" class="custom-control-input" value="2">
+                        <label class="custom-control-label">Python</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option3" name="languageId" class="custom-control-input" value="3">
+                        <label class="custom-control-label">Java</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option4" name="languageId" class="custom-control-input" value="4">
+                        <label class="custom-control-label">C#</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option5" name="languageId" class="custom-control-input" value="5">
+                        <label class="custom-control-label">C</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option6" name="languageId" class="custom-control-input" value="6">
+                        <label class="custom-control-label">C++</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option7" name="languageId" class="custom-control-input" value="7">
+                        <label class="custom-control-label">JavaScript</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option8" name="languageId" class="custom-control-input" value="8">
+                        <label class="custom-control-label">Go</label>
+                    </div>
+                    <br>
+                    <div class="ui radio checkbox">
+                        <input type="radio" id="option9" name="languageId" class="custom-control-input" value="9">
+                        <label class="custom-control-label">PHP</label>
+                    </div>
+                    <br>
+                    <textarea id="editor" th:field="*{content}"></textarea>
+                </div>
+                <button type="submit" class="ui button primary" style="margin-top: 5px;">Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script src="https://cdn.tiny.cloud/1/lz0abin94vbk066vc7dtvk9ww93ufhckx2dtrboojgwmh7f8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+
+</script>
+
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+
+</body>
+</html>

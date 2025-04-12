@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="user-left-menu">
+    <div class="ui secondary vertical menu">
+        <div class="ui card">
+            <div class="image">
+                <img th:src="@{/images/default_user_KODLACOZ.png}" class="ui medium rounded image" src="https://fomantic-ui.com/images/avatar2/large/matthew.png">
+            </div>
+            <div class="content">
+                <a class="header" th:text="${user.fullName}"></a>
+                <div class="meta">
+                    <span class="date" th:text="'Katılma tarihi: ' + ${user.createdDate.getYear()+1900}">Katılma tarihi</span>
+                </div>
+                <div class="description">
+                    <p th:text="${user.biography}"></p>
+                </div>
+            </div>
+            <div class="extra content">
+                <a>
+                    <i class="user icon"></i>
+                    <span th:text="${user.nickname}"></span>
+                </a>
+            </div>
+        </div>
+
+        <a class="item" id="profile" th:href="@{/profile}">
+            Hesabım
+        </a>
+        <a class="item" id="settings" th:href="@{/settings}">
+            Ayarlar
+        </a>
+    </div>
+</div>
+</body>
+</html>

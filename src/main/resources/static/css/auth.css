@@ -1,0 +1,13 @@
+body {
+    background-color: #dadada;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: grayscale;
+}
+
+body > .ui.grid {
+    height: 100%;
+}
+
+.column {
+    max-width: 450px;
+}

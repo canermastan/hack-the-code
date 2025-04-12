@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta
+            name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+    <title>Task List</title>
+
+</head>
+<body>
+
+<div class="ui grid">
+    <div class="one wide column"></div>
+    <div class="ui fourteen wide column" style="margin-top: 5px">
+        <div class="row">
+            <h2 class="ui header">
+                <img class="ui image" src="https://fomantic-ui.com/images/icons/school.png">
+                <div class="content">
+                    Sorular
+                </div>
+            </h2>
+            <a th:href="@{/admin/task/new}" style="flex: 0; float: right; margin-bottom: 5px;"><button class="ui button green">Oluştur</button></a>
+
+            <table class="ui red table">
+                <thead>
+                <tr>
+                    <th>Başlık</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td th:text="${task.getTitle()}">Apples</td>
+                    <td>
+                        <a th:href="@{/admin/task/{id}(id=${task.getId()})}"><button class="ui button primary">Kodlar</button></a>
+                        <a th:href="@{/admin/task/update/{id}(id=${task.getId()})}"><button class="ui button green">Düzenle</button></a>
+                        <form th:action="@{/admin/task/delete/{id}(id=${task.getId()})}" method="POST" style="display: inline-block" onsubmit="return confirmDelete(event)">
+                            <button type="submit" class="ui button red" disabled>Sil</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="row">
+        </div>
+    </div>
+</div>
+<script>
+    function confirmDelete(event) {
+        if (!confirm("İlk onay: Emin misiniz?")) {
+            event.preventDefault();
+            return false;
+        }
+
+        if (!confirm("İkinci onay: Gerçekten silmek istediğinize emin misiniz?")) {
+            event.preventDefault();
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+</body>
+</html>

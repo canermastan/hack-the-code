@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="icon" type="image/ico" href="../../static/images/logo/favicon.ico"
+          th:href="@{/images/logo/favicon.ico}"/>
+
+    <title>Kodla Çöz | Algoritma</title>
+    <div th:insert="fragments/cdn-head-dashboard-imports.html :: fomantic-head"></div>
+    <meta name="_csrf" content="${_csrf.token}"/>
+        <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <style>
+        .ace_gutter-cell {
+            padding-left: 0px !important;
+            border-left: 4px solid transparent;
+        }
+
+        .vertical-button {
+            margin-left: 2px;
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            margin-top: 10px;
+        }
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+            name="description"
+            content="Algoritma sorularını çözerek kodlama yeteneğini geliştir! Kodla Çöz, algoritmaları öğrenmenin ve pratik yapmanın en iyi yoludur. Kodla Çöz, tamamen Türkçe ve ücretsiz!"
+    />
+    <meta property="og:title" content="Kodla Çöz | Algoritma Sorusu Çözme Platformu" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="Kodlacoz.com" />
+    <meta name="keywords" content="Algoritma, Algorithm, Kodlama, Code, Coding, Türkçe"/>
+</head>
+<body>
+<div th:insert="fragments/navbar.html :: navbar"></div>
+<div class="ui grid">
+    <div class="one wide column">
+        <br>
+        <br>
+        <a th:href="@{|/task/${task.id}/comments/0|}">
+            <button class="ui black tertiary large button vertical-button">Tartışma</button>
+        </a>
+    </div>
+    <div class="ui six wide column" style="margin-top: 5px">
+        <div class="row">
+            <div class="ui attached segment">
+                <h2 class="ui header">
+                    <i class="pen icon"></i>
+                    <div class="content">
+                        <div th:text="${task.title}">Başlık</div>
+                    </div>
+                </h2>
+                <p th:utext="${task.content}">Görev açıklaması</p>
+            </div>
+        </div>
+    </div>
+    <div class="ui seven wide column">
+        <div class="row">
+            <!-- <p th:text="${task.code}">Code Alanı</p>-->
+            <h3 class="ui top attached header">
+                <img th:src="@{/images/logo/logo_2x.png}" style="width: 50px; height: auto; margin-right: 15px"/>
+
+                <div class="ui tiny selection dropdown" id="languages">
+                    <div class="text">Dili Seçin</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <!-- TODO try make it clean -->
+                        <div class="item" th:unless="${language == 'Genel'}" th:text="${language}"></div>
+
+                        <div th:if="${language == 'Genel'}" class="item" >
+                            Python
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item">
+                            Java
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item">
+                            C#
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item" >
+                            C
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item">
+                            C++
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item">
+                            JavaScript
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item">
+                            Go
+                        </div>
+                        <div th:if="${language == 'Genel'}" class="item">
+                            Php
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Language Apply Button -->
+                <div th:if="${language == 'Genel'}" style="display: inline-block">
+                    <button class="ui positive button tiny " th:task-id="${task.getId()}" th:language-name="1"
+                            onclick="applyLanguage(this.getAttribute('task-id'), this.getAttribute('language-name'))">
+                        Kodu getir
+                    </button>
+                </div>
+            </h3>
+            <div class="ui attached segment">
+                <div id="editor" style="height: 400px"></div> <!-- Ace C9 Editor -->
+                 <span id="code" th:text="${isSolvedTask ? solvedTaskCode : taskCode.getCode()}"
+                      style="display: none"></span> <!-- get Task Code from Database -->
+
+                <div class="row">
+                    <button class="ui positive button right floated" th:onclick="|executeCode('${task.getId()}', false);|">
+                        Gönder
+                    </button>
+
+                    <button class="ui button right floated" disabled th:onclick="|executeCode('${task.getId()}', true);|">
+                        Çalıştır
+                    </button>
+                </div>
+                <br><br>
+            </div>
+
+            <div class="ui atteched segment">
+                <h3 class="ui header">
+                    Output
+                </h3>
+                <div class="ui atteched segment" id="output">
+                    <div id="loading" style="display: none;">
+                        <div class="loader"></div>
+                    </div>
+                    <span th:if="${output == null}">
+                        Dili seçtikten sonra kodunuzu yazıp "Gönder" butonuna tıklayınız. Gönder butonuna tıkladıktan sonra kodlar test edilecektir. Çalıştır butonu geçici olarak devre dışıdır. Kodlarınızın çıktısını görmek için bir IDE üzerinden çalıştırmanızı tavsiye ederiz.
+                    </span>
+                    <pre th:utext="${output}"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="fragments/cdn-js-imports.html :: fomantic-js"></div>
+<script th:src="@{/js/lib/ace.js}"></script>
+<script th:src="@{/js/lib/theme-solarized_light.js}"></script>
+<script th:src="@{/js/ace/ext-language_tools.js}" src="ace/ext-language_tools.js"></script>
+<script th:src="@{/js/code-editor.js}"></script>
+</body>
+</html>

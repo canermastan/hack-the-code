@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no"
+    />
+    <meta
+      name="description"
+      content="Semantic-UI-Forest, collection of design, themes and templates for Semantic-UI."
+    />
+    <meta name="keywords" content="Semantic-UI, Theme, Design, Template" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Fixed Top Navbar Template for Semantic-UI</title>
+  </head>
+
+  <div th:fragment="navbar">
+    <form th:action="@{/logout}" method="post"></form>
+
+    <body id="root">
+    <div class="ui tablet computer only padded grid">
+      <div class="ui top fixed borderless fluid huge menu">
+        <div class="ui container">
+          <a class="header item" th:href="@{/dashboard}">
+            <!--<div class="item">
+            <img src="https://fomantic-ui.com/images/new-school.jpg">
+            </div>-->
+            <img th:src="@{/images/logo/logo_1x_notext.png}" style="width: 22px; height: auto; margin-right: 5px"/>
+            Kodla Çöz
+          </a>
+          <a class="item" th:href="@{/algorithm}">Algoritma</a>
+          <div class="right menu">
+            <a class="ui dropdown item">
+              <i class="user icon"></i>
+              <span th:text="${user.nickname}">Dropdown</span> <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item" id="btn-profile">Hesabım</div>
+                <div class="item" id="btn-group">Gruplar</div>
+                <div class="item" id="btn-settings">Ayarlar</div>
+                <div class="ui divider"></div>
+                <div sec:authorize="hasAuthority('ADMIN')" class="item" id="btn-admin-panel">Yönetim Paneli</div>
+                <div class="item" id="logout-button">Çıkış yap</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui mobile only padded grid">
+      <div class="ui top fixed borderless huge fluid menu">
+        <a class="header item" th:href="@{/dashboard}">Kodla Çöz</a>
+        <div class="right menu">
+          <div class="item">
+            <button class="ui icon toggle basic button">
+              <i class="content icon"></i>
+            </button>
+          </div>
+        </div>
+        <div class="ui vertical borderless fluid menu">
+          <a class="item" th:href="@{/algorithm}">Algoritma</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function() {
+        $(".ui.toggle.button").click(function() {
+          $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+        });
+
+        $(".ui.dropdown").dropdown();
+      });
+
+      $("#logout-button").click(function(){
+          document.forms[0].submit();
+      });
+
+      $("#btn-profile").click(function(){
+          window.location.href = "/profile";
+      });
+      $("#btn-group").click(function () {
+        window.location.href = "/groups"
+      });
+      $("#btn-settings").click(function(){
+        window.location.href = "/settings";
+      });
+      $("#btn-admin-panel").click(function(){
+        window.location.href = "/admin/task/list";
+      });
+    </script>
+    </body>
+  </div>
+</html>
