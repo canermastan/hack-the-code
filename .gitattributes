@@ -1,2 +1,3 @@
 *.js -linguist-detectable
 src/main/resources/static/* linguist-vendored
+*.html linguist-vendored
